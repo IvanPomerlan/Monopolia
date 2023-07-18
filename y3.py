@@ -1,9 +1,9 @@
-a = 24
-dni = 0
-while a < 201:
-    print(a)
-    print(a)
-    a += 6
-    print(a)
-    dni += 3
-print(dni)
+import time
+start = float(time.time())
+while True:
+
+    end = float(time.time()) - float(start)
+
+    if end >= 7.0:
+
+        print("lox")

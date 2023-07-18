@@ -2,7 +2,6 @@ import pygame
 import sys
 import random
 import time
-from test_beck import *
 
 
 class Igroki():
@@ -72,7 +71,7 @@ class Batton:
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if self.x <= mouses[0] <= self.xx and self.y <= mouses[1] <= self.yy:
                     # if action is not NONE: тут так было, но я изменил
-                    time.sleep(0.1)
+
 
                     screen.blit(self.image_fon, (self.xxx, self.yyy))
                     pygame.display.update()
@@ -89,34 +88,78 @@ class Batton:
 
 def mesta_obozna4enie():
     pole1 = Mesta("Старт", "Я ГЕЙ", 0, 0, 292, 31, 321, 31)
-    pole2 = Mesta("Запоріжжя", "ЗП", 40, 20, 292, 79, 321, 79)
-    pole3 = Mesta("Укр. Залізниця", "УЗ", 40, 20, 292, 127, 321, 127)
+    pole2 = Mesta("Запоріжжя", "ЗП", 500, 500, 292, 79, 321, 79)
+    pole3 = Mesta("Укр. Залізниця", "УЗ", 20, 60, 292, 127, 321, 127)
     pole4 = Mesta("Форс Мажор", "НЕ КОПАЙТЕСЬ В ГОЛОМ КОДЕ", 5, 6, 292, 178, 321, 178)
-    pole5 = Mesta("Маріуполь", "МР", 7, 8, 292, 223, 321, 223)
-    pole6 = Mesta("Арабаська стілка", "Ас", 9, 8, 292, 271, 321, 271)
+    pole5 = Mesta("Маріуполь", "МР", 30, 100, 292, 223, 321, 223)
+    pole6 = Mesta("Арабаська стілка", "Ас", 40, 120, 292, 271, 321, 271)
     pole7 = Mesta("Армія", "Кобчена сосиска", 10, 11, 292, 319, 321, 319)
-    pole8 = Mesta("Полтава", "ПЛ", 0, 0, 244, 319, 272, 319)
-    pole9 = Mesta("Житомир", "ЖТ", 0, 0, 196, 319, 224, 319)
+    pole8 = Mesta("Полтава", "ПЛ", 50, 110, 244, 319, 272, 319)
+    pole9 = Mesta("Житомир", "ЖТ", 60, 120, 196, 319, 224, 319)
     pole10 = Mesta("Шанс", "Error 404", 0, 0, 148, 319, 176, 319)
     pole11 = Mesta("Поїхати в Польшу", "Мене в дитинстві", 0, 0, 100, 319, 128, 319)
-    pole12 = Mesta("Херсон", "ХР", 0, 0, 52, 319, 80, 319)
+    pole12 = Mesta("Херсон", "ХР", 70, 130, 52, 319, 80, 319)
     pole13 = Mesta("Дивна темка", "били...", 0, 0, 4, 319, 32, 319)
-    pole14 = Mesta("Одеса", "Од", 0, 0, 4, 271, 32, 271)
-    pole15 = Mesta("Укр. Залізниця", "УЗ", 0, 0, 4, 223, 32, 223)
+    pole14 = Mesta("Одеса", "Од", 90, 150, 4, 271, 32, 271)
+    pole15 = Mesta("Укр. Залізниця", "УЗ", 20, 60, 4, 223, 32, 223)
     pole16 = Mesta("Форс Мажор", "", 0, 0, 4, 175, 32, 175)
-    pole17 = Mesta("Шепетівка", "ШП", 0, 0, 4, 127, 32, 127)
-    pole18 = Mesta("Харків", "ХК", 0, 0, 4, 79, 32, 79)
+    pole17 = Mesta("Шепетівка", "ШП", 120, 170, 4, 127, 32, 127)
+    pole18 = Mesta("Харків", "ХК", 140, 190, 4, 79, 32, 79)
     pole19 = Mesta("Пійман на закладці", "", 0, 0, 4, 31, 32, 31)
-    pole20 = Mesta("Дніпро", "ДН", 0, 0, 52, 31, 80, 31)
-    pole21 = Mesta("Київ", "КЇ", 0, 0, 100, 31, 128, 31)
+    pole20 = Mesta("Дніпро", "ДН", 160, 210, 52, 31, 80, 31)
+    pole21 = Mesta("Київ", "КЇ", 190, 240, 100, 31, 128, 31)
     pole22 = Mesta("Шанс", "", 0, 0, 148, 31, 176, 31)
-    pole23 = Mesta("Укр. Залізниця", "УЗ", 0, 0, 196, 31, 224, 31)
-    pole24 = Mesta("Львів", "ЛВ", 0, 0, 244, 31, 272, 31)
+    pole23 = Mesta("Укр. Залізниця", "УЗ", 20, 60, 196, 31, 224, 31)
+    pole24 = Mesta("Львів", "ЛВ", 200, 260, 244, 31, 272, 31)
+
+
+def end_game():
+    pygame.mixer.music.load("Arstotska.mp3")
+    pygame.mixer.music.play(-1)
+    if player == 1:
+        a = 0
+    else:
+        a = 1
+    b = 338
+    b1 = 1008
+    c = 495
+    c1 = 1100
+    d = 490
+    d1 = 1200
+    start = time.time()
+    while True:
+        for ev in pygame.event.get():
+            if ev.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+                
+        ensd = time.time() - start
+        if ensd >= 1:
+
+            print("end")
+            screen.blit(end_fon, (0, 0))
+            screen.blit(end, (b, b1))
+            f1 = pygame.font.Font(None, 40)
+            text1 = f1.render(Igroky[player]['name'], 1, (0, 0, 0))
+            screen.blit(text1, (c, c1))
+            f2 = pygame.font.Font(None, 36)
+            text2 = f2.render(str(Igroky[a]['name']), 1, (0, 0, 0))
+            screen.blit(text2, (d, d1))
+            pygame.display.update()
+            b1 -= 50
+            c1 -= 50
+            d1 -= 50
+            start = time.time()
+            if b1 <= 200:
+                time.sleep(80)
+                sys.exit()
+
 
 
 def menus_play():
     button_menu_play = Batton(308, 435, 488, 482, 279, 334, menus_plays, menu)
     button_menu_play.battons(fff)
+
 
 def end_hod():
     global aa
@@ -133,9 +176,13 @@ def kubik():
 def bD():
     batton_buy_cell = Batton(347, 656, 509, 756, 347, 656, buy2, buy4)
     batton_buy_cell.battons(buy_area)
+
+
 def bN():
     batton_buy_cell1 = Batton(516, 656, 678, 756, 516, 656, buy3, buy5)
     batton_buy_cell1.battons(no_bay_area)
+
+
 def buy_cell():
     bD()
     bN()
@@ -152,7 +199,6 @@ def fors_major():
 
 
 def buy_area():
-
     render_area(player)
     screen.blit(renz, (333, 545))
     time.sleep(3)
@@ -164,7 +210,6 @@ def no_bay_area():
     screen.blit(renz, (333, 545))
     print("не продано")
     end_hod()
-
 
 
 def propustitb_XOD(z):
@@ -188,6 +233,7 @@ def render_area_use(ae):
         f1 = pygame.font.Font(None, 36)
         text1 = f1.render(str(Igroky[ae]['my_area']), 1, (0, 0, 0))
         screen.blit(text1, (526, 232))
+        pygame.display.update()
 
     else:
         screen.blit(player_menu, (338, 154))
@@ -206,13 +252,14 @@ def render_area_use(ae):
         f1 = pygame.font.Font(None, 36)
         text3 = f1.render(str(result2), 1, (0, 0, 0))
         screen.blit(text3, (526, 232))
+        pygame.display.update()
 
 
 def render_area(ea):
     screen.blit(player_menu, (338, 154))
     house = int(Igroky[ea]['hod_kubika'])
     Igroky[ea]['my_area'] += str(All_pole[house]['name_little'] + ", ")
-    All_pole[house]['valsnuk'] = 1
+    All_pole[house]['valsnuk'] = int(player) + 1
     if len(Igroky[ea]['my_area']) < 12:
         Igroky[ea]['money'] -= All_pole[house]['cell']
         print(len(Igroky[ea]['my_area']))
@@ -287,6 +334,8 @@ def render_icons():
 
 
 def fff():
+    pygame.mixer.music.stop()
+    print(len(Igroky[0]['my_area']))
     global aa
     screen.blit(myimagge, (0, 0))
     pygame.display.update()
@@ -299,6 +348,28 @@ def fff():
     print(All_pole)
     while 2 == 2:
         for x in Igroky:
+            while x['money'] < 0:
+                if x['money'] <= 0:
+                    if len(x['my_area']) == 0:
+                        print("end_game")
+                        screen.blit(end_fon, (0, 0))
+                        pygame.display.update()
+                        start = float(time.time())
+                        while True:
+                            ends = float(time.time()) - float(start)
+                            if ends >= 7.0:
+                                end_game()
+                    else:
+                        for y in All_pole:
+                            print("не то")
+                            p = str(x['my_area'])
+                            j = str(y['name_little'] + ", ")
+                            i = p[:4]
+                            if j == i:
+                                print("то")
+                                x['my_area'] = p.replace(i, "")
+                                y['valsnuk'] = 0
+                                x['money'] += int(y['cell'] * 0.9)
 
             global propusk
 
@@ -337,13 +408,12 @@ def fff():
             text2 = f2.render(str(x['money']), 1, (0, 0, 0))
             screen.blit(text2, (510, 195))
             render_area_use(player)
-            x['hod_kubika'] += random.randint(1, 5)                             # КУБИК ТУТ
+            x['hod_kubika'] += random.randint(1, 1)  # КУБИК ТУТ
 
             pygame.display.update()
 
             while aa < 2:
                 kubik()
-
 
 
 # тоже самое но для второго(если игроков будет больше просто добавь elif
@@ -360,15 +430,26 @@ def you_lox():
     render_icons()
     rul = int(Igroky[a]['hod_kubika'])
     lur = [1, 2, 4, 5, 7, 8, 11, 13, 14, 16, 17, 19, 20, 22, 23]
-    lur_f = [3, 15]
-
-    result_armia = rul == 6
-    result_fors = rul in lur_f
-    result_chans = rul == 9 or 21
+    result_armia = rul in [6]
+    result_fors = rul in [3, 15]
+    result_chans = rul in [9, 21]
     print(rul)
     print(All_pole[rul])
     result = rul in lur
-    if result == True:
+    print("VLASNUK " + str(All_pole[rul]['valsnuk']))
+    print("c xtv chfdybdftv " + str(a + 1))
+    ab = int(All_pole[rul]['valsnuk'])
+    ba = int(a + 1)
+    if ab == ba:
+        # тут можна добавлять покупку домов, тут проходит определение ты владелец или нет.
+        time.sleep(3)
+        aa = 2
+    elif result == True:
+
+        if Igroky[a]['money'] < All_pole[rul]['cell']:
+            print("Грошей маловато")
+            end_hod()
+
         if All_pole[rul]['valsnuk'] == 0:
             print(All_pole[rul]['valsnuk'])
             screen.blit(buy1, (338, 550))
@@ -383,8 +464,14 @@ def you_lox():
 
         else:
             # это аренда
+            s = 0
+            if player == 0:
+                s = 1
+            else:
+                s = 0
             print("поле чьето")
             Igroky[player]['money'] -= All_pole[rul]['arenda']
+            Igroky[s]['money'] += All_pole[rul]['arenda']
             screen.blit(orenda, (338, 550))
             f1 = pygame.font.Font(None, 50)
             text1 = f1.render(str(All_pole[rul]['name']), 1, (0, 0, 0))
@@ -457,6 +544,9 @@ def fors_major_core():
 
 
 def Run_game():
+    pygame.mixer.music.load("Nachalo.mp3")
+    pygame.mixer.music.play(1)
+
     haha1 = Igroki("Перший")
     haha2 = Igroki("Другий")
     mesta_obozna4enie()
@@ -544,7 +634,10 @@ Chans_fon = pygame.image.load("Chans_fon.png")
 Chans_fon = pygame.transform.scale(Chans_fon, (102, 183))
 orenda = pygame.image.load("Orenda.png")
 orenda = pygame.transform.scale(orenda, (350, 276))
-
+end = pygame.image.load("END.png")
+end = pygame.transform.scale(end, (324, 426))
+end_fon = pygame.image.load("End_fon.png")
+end_fon = pygame.transform.scale(end_fon, (1008, 1008))
 pygame.display.set_icon(mymaga)
 Igroky = []
 All_pole = []
