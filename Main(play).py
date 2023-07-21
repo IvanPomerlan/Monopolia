@@ -2,6 +2,7 @@ import pygame
 import sys
 import random
 import time
+from ctypes import *
 
 
 class Igroki():
@@ -72,7 +73,6 @@ class Batton:
                 if self.x <= mouses[0] <= self.xx and self.y <= mouses[1] <= self.yy:
                     # if action is not NONE: тут так было, но я изменил
 
-
                     screen.blit(self.image_fon, (self.xxx, self.yyy))
                     pygame.display.update()
                     action()
@@ -132,7 +132,7 @@ def end_game():
             if ev.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-                
+
         ensd = time.time() - start
         if ensd >= 1:
 
@@ -151,9 +151,14 @@ def end_game():
             d1 -= 50
             start = time.time()
             if b1 <= 200:
-                time.sleep(80)
-                sys.exit()
-
+                while True:
+                    for ev in pygame.event.get():
+                        if ev.type == pygame.QUIT:
+                            pygame.quit()
+                            quit()
+                    ensd = time.time() - start
+                    if ensd >= 84:
+                        sys.exit()
 
 
 def menus_play():
@@ -190,7 +195,7 @@ def buy_cell():
 
 def chans():  # !!!!!!!!!!!!!!!!
     batton_buy_cell1 = Batton(180, 411, 279, 591, 180, 411, Chans, Chans_fon)
-    batton_buy_cell1.battons(no_bay_area)
+    batton_buy_cell1.battons(shans_core)
 
 
 def fors_major():
@@ -346,6 +351,8 @@ def fff():
     pygame.display.update()
     print(Igroky)
     print(All_pole)
+    pygame.mixer.music.load("Song_fon.mp3")
+    pygame.mixer.music.play(-1)
     while 2 == 2:
         for x in Igroky:
             while x['money'] < 0:
@@ -355,7 +362,12 @@ def fff():
                         screen.blit(end_fon, (0, 0))
                         pygame.display.update()
                         start = float(time.time())
+                        pygame.mixer.music.stop()
                         while True:
+                            for ev in pygame.event.get():
+                                if ev.type == pygame.QUIT:
+                                    pygame.quit()
+                                    quit()
                             ends = float(time.time()) - float(start)
                             if ends >= 7.0:
                                 end_game()
@@ -408,7 +420,7 @@ def fff():
             text2 = f2.render(str(x['money']), 1, (0, 0, 0))
             screen.blit(text2, (510, 195))
             render_area_use(player)
-            x['hod_kubika'] += random.randint(1, 1)  # КУБИК ТУТ
+            x['hod_kubika'] += random.randint(3, 3)             # КУБИК ТУТ
 
             pygame.display.update()
 
@@ -433,6 +445,9 @@ def you_lox():
     result_armia = rul in [6]
     result_fors = rul in [3, 15]
     result_chans = rul in [9, 21]
+    result_klad = rul in [18]
+    result_poland = rul in [10]
+    result_temka = rul in [12]
     print(rul)
     print(All_pole[rul])
     result = rul in lur
@@ -496,9 +511,9 @@ def you_lox():
             Igroky[a]['money'] -= 50
             Igroky[a]['hod_kubika'] = 6
             render_icons()
+            render_area_use(a)
             propustitb_XOD(player + 1)
             time.sleep(3)
-
             end_hod()
 
     elif result_chans == True:
@@ -506,6 +521,42 @@ def you_lox():
             chans()
 
 
+
+    elif result_klad == True:
+        print("KlAD")
+        screen.blit(klad, (338, 550))
+        render_icons()
+        render_area_use(a)
+        propustitb_XOD(player + 1)
+        time.sleep(3)
+        end_hod()
+
+    elif result_poland == True:
+        print("Poland")
+        screen.blit(poland, (338, 550))
+        render_icons()
+        Igroky[a]['money'] += 300
+        render_area_use(a)
+        time.sleep(3)
+        end_hod()
+
+    elif result_temka == True:
+        print("Temkka")
+        t = random.randint(1, 2)
+        if t == 1:
+            screen.blit(temka_minus, (338, 550))
+            render_icons()
+            Igroky[a]['money'] -= 100
+            render_area_use(a)
+            time.sleep(3)
+            end_hod()
+        else:
+            screen.blit(temka_plus, (338, 550))
+            render_icons()
+            Igroky[a]['money'] += 100
+            render_area_use(a)
+            time.sleep(3)
+            end_hod()
 
 
     else:
@@ -525,22 +576,125 @@ def fors_major_core():
     global aa
     x = int(player)
     print()
-    a = random.randint(1, 1)
+    a = random.randint(5, 5)
+
     if a == 1:
         print("armia")
         screen.blit(fors_major_1, (338, 550))
         Igroky[x]['money'] -= 50
         Igroky[x]['hod_kubika'] = 6
+        render_area_use(x)
         render_icons()
         propustitb_XOD(x + 1)
         time.sleep(3)
-
         end_hod()
 
+    elif a == 2:
+        print("KlAD")
+        screen.blit(klad, (338, 550))
+        Igroky[x]['hod_kubika'] = 18
+        render_icons()
+        propustitb_XOD(player + 1)
+        time.sleep(3)
+        end_hod()
 
+    elif a == 3:
+        print("Krasa")
+        screen.blit(fors_major_2, (338, 550))
+        render_icons()
+        Igroky[x]['money'] -= 100
+        render_area_use(x)
+        time.sleep(3)
+        end_hod()
+
+    elif a == 4:
+        print("Temkka")
+        t = random.randint(1, 2)
+        if t == 1:
+            screen.blit(temka_minus, (338, 550))
+            render_icons()
+            Igroky[x]['money'] -= 100
+            render_area_use(x)
+            time.sleep(3)
+            end_hod()
+        else:
+            screen.blit(temka_plus, (338, 550))
+            render_icons()
+            Igroky[x]['money'] += 100
+            render_area_use(x)
+            time.sleep(3)
+            end_hod()
+    elif a == 5:
+        print("9MA")
+        screen.blit(fors_major_3, (338, 550))
+        render_icons()
+        Igroky[x]['money'] -= 50
+        render_area_use(x)
+        time.sleep(3)
+        end_hod()
+
+def shans_core():
+    global player
+    global aa
+    x = int(player)
+    print()
+    a = random.randint(3, 5)
+
+    if a == 1:
+        print("matrazt")
+        screen.blit(matrazt, (338, 550))
+        render_icons()
+        Igroky[x]['money'] += 200
+        render_area_use(x)
+        time.sleep(4)
+        end_hod()
 
     elif a == 2:
-        print()
+        print("poland")
+        screen.blit(poland, (338, 550))
+        render_icons()
+        Igroky[x]['money'] += 300
+        render_area_use(x)
+        render_icons()
+        time.sleep(3)
+        end_hod()
+
+    elif a == 3:
+        print("Temkka")
+        t = random.randint(1, 2)
+        if t == 1:
+            screen.blit(temka_minus, (338, 550))
+            render_icons()
+            Igroky[x]['money'] -= 100
+            render_area_use(x)
+            time.sleep(3)
+            end_hod()
+        else:
+            screen.blit(temka_plus, (338, 550))
+            render_icons()
+            Igroky[x]['money'] += 100
+            render_area_use(x)
+            time.sleep(3)
+            end_hod()
+    elif a == 4:
+        print("50grn")
+        screen.blit(chans2, (338, 550))
+        render_icons()
+        Igroky[x]['money'] += 50
+        render_area_use(x)
+        time.sleep(4)
+        end_hod()
+
+    elif a == 5:
+        print("50grn")
+        screen.blit(chans3, (338, 550))
+        Igroky[x]['hod_kubika'] = 0
+        Igroky[x]['money'] += 200
+        render_area_use(x)
+        render_icons()
+        time.sleep(4)
+        end_hod()
+
 
 
 def Run_game():
@@ -638,6 +792,28 @@ end = pygame.image.load("END.png")
 end = pygame.transform.scale(end, (324, 426))
 end_fon = pygame.image.load("End_fon.png")
 end_fon = pygame.transform.scale(end_fon, (1008, 1008))
+klad = pygame.image.load("Klad.png")
+klad = pygame.transform.scale(klad, (350, 276))
+poland = pygame.image.load("Poland.png")
+poland = pygame.transform.scale(poland, (350, 276))
+matrazt = pygame.image.load("Shans1.png")
+matrazt = pygame.transform.scale(matrazt, (350, 276))
+fors_major_2 = pygame.image.load("fors_major_2.png")
+fors_major_2 = pygame.transform.scale(fors_major_2, (350, 276))
+temka_plus = pygame.image.load("Temka.png")
+temka_plus = pygame.transform.scale(temka_plus, (350, 276))
+temka_minus = pygame.image.load("Temka2.png")
+temka_minus = pygame.transform.scale(temka_minus, (350, 276))
+fors_major_3 = pygame.image.load("fors_major_3.png")
+fors_major_3 = pygame.transform.scale(fors_major_3, (350, 276))
+chans2 = pygame.image.load("Shans2.png")
+chans2 = pygame.transform.scale(chans2, (350, 276))
+chans3 = pygame.image.load("Shans3.png")
+chans3 = pygame.transform.scale(chans3, (350, 276))
+
+
+
+
 pygame.display.set_icon(mymaga)
 Igroky = []
 All_pole = []
