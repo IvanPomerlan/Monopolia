@@ -420,7 +420,7 @@ def fff():
             text2 = f2.render(str(x['money']), 1, (0, 0, 0))
             screen.blit(text2, (510, 195))
             render_area_use(player)
-            x['hod_kubika'] += random.randint(3, 3)             # КУБИК ТУТ
+            x['hod_kubika'] += random.randint(1, 5)  # КУБИК ТУТ
 
             pygame.display.update()
 
@@ -576,7 +576,7 @@ def fors_major_core():
     global aa
     x = int(player)
     print()
-    a = random.randint(5, 5)
+    a = random.randint(1, 5)
 
     if a == 1:
         print("armia")
@@ -633,12 +633,13 @@ def fors_major_core():
         time.sleep(3)
         end_hod()
 
+
 def shans_core():
     global player
     global aa
     x = int(player)
     print()
-    a = random.randint(3, 5)
+    a = random.randint(1, 5)
 
     if a == 1:
         print("matrazt")
@@ -694,7 +695,6 @@ def shans_core():
         render_icons()
         time.sleep(4)
         end_hod()
-
 
 
 def Run_game():
@@ -810,9 +810,6 @@ chans2 = pygame.image.load("Shans2.png")
 chans2 = pygame.transform.scale(chans2, (350, 276))
 chans3 = pygame.image.load("Shans3.png")
 chans3 = pygame.transform.scale(chans3, (350, 276))
-
-
-
 
 pygame.display.set_icon(mymaga)
 Igroky = []
